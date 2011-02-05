@@ -1,0 +1,1 @@
+	menu_principal << "<li>" + link_to(item, :controller => item.pluralize) + "</li>"

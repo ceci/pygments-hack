@@ -1,0 +1,146 @@
+\documentclass[a4paper, 11pt, oneside]{book}
+
+%% For portuguese compatibility
+\usepackage[brazil]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{float}
+\usepackage[scaled]{helvet}
+\renewcommand*\familydefault{\sfdefault}
+\usepackage{indentfirst}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Packages
+\usepackage[dvips]{graphicx,psfrag} 
+\usepackage{ifthen}
+\usepackage{makeidx}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{minted}
+\usepackage{pstcol}
+\usepackage{colortbl}
+\usepackage{url}  
+\usepackage{rotating}
+\usepackage{multirow}
+\usepackage{colortbl}
+\usepackage[table]{xcolor}
+
+\usepackage{tubaina}
+
+%This has to be the last package declared, for some reason
+\usepackage[pdftex]{hyperref}
+
+\definecolor{boxhead}{gray}{0.8}
+
+%%%%%%%PAGE SETUP%%%%%%%%%%%%%
+\oddsidemargin    -6mm
+\textwidth        180mm
+\topmargin        -10mm
+\textheight       250mm
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\makeatother
+
+\begin{document}
+
+
+\section{Nova tubainabox}
+
+Uma tentativa agora com um environment pra criar boxes.
+
+\begin{tubainabox}{Uma note qualquer}
+Às vezes a gente quer escrever uma note extensa e que tem código dentro, mas o minted zuava 
+todo o código, então agora estamos usando minipage em vez de parbox e parece que resolvemos 
+o problema.
+
+Às vezes a gente quer escrever uma note extensa e que tem código dentro, mas o minted zuava 
+todo o código, então agora estamos usando minipage em vez de parbox e parece que resolvemos 
+o problema.}
+
+{\small
+  \begin{minted}[linenos]{ruby}
+    def menu_principal
+    menu = %w(cliente qualificacão restaurante)
+    menu_principal = "<ul>"
+    menu.each do |item|
+    menu_principal << "<li>" + link_to(item, :controller => item.pluralize) + "</li>"
+    end
+    menu_principal << "</ul>"
+    raw menu_principal
+    end
+  \end{minted}
+\end{tubainabox}
+
+
+\section{teste com linguagem}
+
+
+{\small
+  \begin{minted}[linenos, numbersep:5px]{java}
+    @Entity
+    public class Card implements Identifiable, FromProject {
+
+      @Id
+      @GeneratedValue
+      private Long id;
+
+      @Enumerated(EnumType.STRING)
+      private Status status = Status.TODO;
+
+      public static enum Status {
+	TODO, DONE
+      }
+
+      private CardRepository getRepository() {
+	if (repository == null) {
+	  throw new IllegalStateException("Repository was not set. You should" +  
+                                                              "inject it first");
+	}
+	return repository;
+      }
+
+      public List<Long> deleteSubCards() {
+	List<Long> ids = new ArrayList<Long>();
+	for (Card sub : getSubcards()) {
+	  ids.add(sub.getId());
+          getRepository().remove(sub);
+        }
+	return ids;
+      }
+    }  
+  \end{minted}
+}
+
+\section{Trechos do FJ-11}
+
+\\[1em]
+{\small
+\begin{minted}[mathescape]{text}
+javap -c MeuPrograma
+\end{minted}
+}
+\\[1em]
+
+E a saída:
+\\[1em]
+
+{\small
+\begin{minted}{text}
+MeuPrograma();
+  Code:
+   0:   aload_0
+   1:   invokespecial   #1; //Method java/lang/Object.''<init>'':()V
+   4:   return
+
+public static void main(java.lang.String[]);
+  Code:
+   0:   getstatic       #2; //Field java/lang/System.out:Ljava/io/PrintStream;
+   3:   ldc     #3; //String Minha primeira aplicacao Java!!
+   5:   invokevirtual   #4; //Method java/io/PrintStream.println:(Ljava/lang/String;)
+   8:   return
+\end{minted}
+}
+\\[1em]
+
+
+\end{document}

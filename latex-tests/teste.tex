@@ -1,0 +1,75 @@
+\documentclass[a4paper, 11pt, oneside]{book}
+
+%% For portuguese compatibility
+\usepackage[brazil]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{float}
+\usepackage[scaled]{helvet}
+\renewcommand*\familydefault{\sfdefault}
+\usepackage{indentfirst}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Packages
+\usepackage[dvips]{graphicx,psfrag} 
+\usepackage{ifthen}
+\usepackage{makeidx}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{mintedx}
+\usepackage{pstcol}
+\usepackage{colortbl}
+\usepackage{url}  
+\usepackage{rotating}
+\usepackage{multirow}
+\usepackage{colortbl}
+\usepackage[table]{xcolor}
+
+\usepackage{tubaina}
+
+%This has to be the last package declared, for some reason
+\usepackage[pdftex]{hyperref}
+
+\definecolor{boxhead}{gray}{0.8}
+
+%%%%%%%PAGE SETUP%%%%%%%%%%%%%
+\oddsidemargin    -6mm
+\textwidth        180mm
+\topmargin        -10mm
+\textheight       250mm
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\makeatother
+
+\begin{document}
+
+
+\section{Nova tubainabox}
+
+Uma tentativa agora com um environment pra criar boxes.
+
+\begin{tubainabox}{Uma note qualquer}
+Às vezes a gente quer escrever uma note extensa e que tem código dentro, mas o minted zuava 
+todo o código, então agora estamos usando minipage em vez de parbox e parece que resolvemos 
+o problema.
+
+Às vezes a gente quer escrever uma note extensa e que tem código dentro, mas o minted zuava 
+todo o código, então agora estamos usando minipage em vez de parbox e parece que resolvemos 
+o problema.}
+
+{\small
+  \begin{minted}[linenos, hgs=1]{ruby}
+    def menu_principal
+    menu = %w(cliente qualificacão restaurante)
+    menu_principal = "<ul>"
+    menu.each do |item|
+    menu_principal << "<li>" + link_to(item, :controller => item.pluralize) + "</li>"
+    end
+    menu_principal << "</ul>"
+    raw menu_principal
+    end
+  \end{minted}
+\end{tubainabox}
+
+
+\end{document}
