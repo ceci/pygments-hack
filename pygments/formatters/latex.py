@@ -239,8 +239,7 @@ class LatexFormatter(Formatter):
             else:
                 return '1,1,1'
 
-	c2d['t_highlight'] =  r'\let\$$@bf=\textbf'.replace('$$', cp)
-
+	c2d['hgs'] =  r'\let\$$@hgs=\underline'.replace('$$', cp)
         for ttype, ndef in self.style:
             name = _get_ttype_name(ttype)
             cmndef = ''
@@ -335,7 +334,7 @@ class LatexFormatter(Formatter):
                 value = escape_tex(value, self.commandprefix)
             styles = []
 	    if '%d' % lineno in self.highlights:
-		styles.append('t_highlight')
+		styles.append('hgs')
             while ttype is not Token:
                 try:
                     styles.append(t2n[ttype])
