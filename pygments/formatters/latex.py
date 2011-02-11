@@ -239,7 +239,7 @@ class LatexFormatter(Formatter):
             else:
                 return '1,1,1'
 
-	c2d['hl'] =  r'\def\$$@bc##1{\colorbox[rgb]{1.00, 1.00, 0.00}{##1}}'.replace('$$', cp)
+	c2d['hl'] =  r'\def\$$@bc##1{\colorbox[rgb]{1.00, 1.00, 0.00}{\strut ##1}}'.replace('$$', cp)
         for ttype, ndef in self.style:
             name = _get_ttype_name(ttype)
             cmndef = ''
@@ -335,6 +335,7 @@ class LatexFormatter(Formatter):
                 value = escape_tex(value, self.commandprefix)
             styles = []
 	    if '%d' % lineno in self.highlights:
+		print ttype
 		styles.append('hl')
 	    
             while ttype is not Token:
