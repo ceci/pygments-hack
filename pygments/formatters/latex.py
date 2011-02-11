@@ -292,6 +292,9 @@ class LatexFormatter(Formatter):
         if self.full:
             realoutfile = outfile
             outfile = StringIO()
+        if self.highlights:
+            highoutfile = outfile
+            outfile = StringIO()
 
         outfile.write(r'\begin{Verbatim}[commandchars=\\\{\}')
         if self.linenos:
@@ -304,7 +307,6 @@ class LatexFormatter(Formatter):
         if self.verboptions:
             outfile.write(',' + self.verboptions)
         outfile.write(']\n')
-	lineno = 1
         for ttype, value in tokensource:
             if ttype in Token.Comment:
                 if self.texcomments:
@@ -334,9 +336,6 @@ class LatexFormatter(Formatter):
             else:
                 value = escape_tex(value, self.commandprefix)
             styles = []
-	    if '%d' % lineno in self.highlights:
-		print ttype
-		styles.append('hl')
 	    
             while ttype is not Token:
                 try:
@@ -351,7 +350,6 @@ class LatexFormatter(Formatter):
                 for line in spl[:-1]:
                     if line:
                         outfile.write("\\%s{%s}{%s}" % (cp, styleval, line))
-		    lineno += 1
                     outfile.write('\n')
                 if spl[-1]:
                     outfile.write("\\%s{%s}{%s}" % (cp, styleval, spl[-1]))
@@ -359,6 +357,14 @@ class LatexFormatter(Formatter):
                 outfile.write(value)
 
         outfile.write('\\end{Verbatim}\n')
+        if (self.highlights):
+            lines = outfile.getvalue().split('\n')
+            for l in self.highlights:
+                lines[int(l)] = "\\%s{%s}{%s}" % (cp, 'hl', lines[int(l)])
+            outfile = highoutfile
+            for l in lines:
+                outfile.write(l)
+		outfile.write('\n')
 
         if self.full:
             realoutfile.write(DOC_TEMPLATE %
