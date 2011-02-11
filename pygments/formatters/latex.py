@@ -239,7 +239,7 @@ class LatexFormatter(Formatter):
             else:
                 return '1,1,1'
 
-	c2d['hl'] =  r'\def\$$@tc##1{\textcolor[rgb]{1.00, 0.00, 0.00}{##1}}'.replace('$$', cp)
+	c2d['hl'] =  r'\def\$$@bc##1{\colorbox[rgb]{1.00, 1.00, 0.00}{##1}}'.replace('$$', cp)
         for ttype, ndef in self.style:
             name = _get_ttype_name(ttype)
             cmndef = ''
@@ -284,7 +284,7 @@ class LatexFormatter(Formatter):
                                  'styles': '\n'.join(styles)}
 
     def format_unencoded(self, tokensource, outfile):
-	print self.get_style_defs()
+	#print self.get_style_defs()
         # TODO: add support for background colors
         t2n = self.ttype2name
         cp = self.commandprefix
@@ -336,14 +336,14 @@ class LatexFormatter(Formatter):
             styles = []
 	    if '%d' % lineno in self.highlights:
 		styles.append('hl')
-	    else:
-                while ttype is not Token:
-                    try:
-                        styles.append(t2n[ttype])
-                    except KeyError:
-                        # not in current style
-                        styles.append(_get_ttype_name(ttype))
-                    ttype = ttype.parent
+	    
+            while ttype is not Token:
+                try:
+                    styles.append(t2n[ttype])
+                except KeyError:
+                    # not in current style
+                    styles.append(_get_ttype_name(ttype))
+                ttype = ttype.parent
             styleval = '+'.join(reversed(styles))
             if styleval:
                 spl = value.split('\n')
