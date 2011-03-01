@@ -239,7 +239,7 @@ class LatexFormatter(Formatter):
             else:
                 return '1,1,1'
 
-	c2d['hgs'] =  r'\let\$$@hgs=\underline'.replace('$$', cp)
+	c2d['hl'] =  r'\def\$$@bc##1{\colorbox[rgb]{1.00, 1.00, 0.00}{\strut ##1}}'.replace('$$', cp)
         for ttype, ndef in self.style:
             name = _get_ttype_name(ttype)
             cmndef = ''
@@ -284,12 +284,16 @@ class LatexFormatter(Formatter):
                                  'styles': '\n'.join(styles)}
 
     def format_unencoded(self, tokensource, outfile):
+	#print self.get_style_defs()
         # TODO: add support for background colors
         t2n = self.ttype2name
         cp = self.commandprefix
 
         if self.full:
             realoutfile = outfile
+            outfile = StringIO()
+        if self.highlights:
+            highoutfile = outfile
             outfile = StringIO()
 
         outfile.write(r'\begin{Verbatim}[commandchars=\\\{\}')
@@ -303,7 +307,6 @@ class LatexFormatter(Formatter):
         if self.verboptions:
             outfile.write(',' + self.verboptions)
         outfile.write(']\n')
-	lineno = 1
         for ttype, value in tokensource:
             if ttype in Token.Comment:
                 if self.texcomments:
@@ -333,8 +336,7 @@ class LatexFormatter(Formatter):
             else:
                 value = escape_tex(value, self.commandprefix)
             styles = []
-	    if '%d' % lineno in self.highlights:
-		styles.append('hgs')
+	    
             while ttype is not Token:
                 try:
                     styles.append(t2n[ttype])
@@ -348,7 +350,6 @@ class LatexFormatter(Formatter):
                 for line in spl[:-1]:
                     if line:
                         outfile.write("\\%s{%s}{%s}" % (cp, styleval, line))
-		    lineno += 1
                     outfile.write('\n')
                 if spl[-1]:
                     outfile.write("\\%s{%s}{%s}" % (cp, styleval, spl[-1]))
@@ -356,6 +357,14 @@ class LatexFormatter(Formatter):
                 outfile.write(value)
 
         outfile.write('\\end{Verbatim}\n')
+        if (self.highlights):
+            lines = outfile.getvalue().split('\n')
+            for l in self.highlights:
+                lines[int(l)] = "\\%s{%s}{%s}" % (cp, 'hl', lines[int(l)])
+            outfile = highoutfile
+            for l in lines:
+                outfile.write(l)
+		outfile.write('\n')
 
         if self.full:
             realoutfile.write(DOC_TEMPLATE %
