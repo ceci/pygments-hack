@@ -1,12 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-    Pygments
+    pygments-hack
     ~~~~~~~~
 
     Pygments is a syntax highlighting package written in Python.
 
-    It is a generic syntax highlighter for general use in all kinds of software
+    This hack adds code lines highlighting for enhancing visibility of certain
+    lines of the code.
+
+    Pygments is a generic syntax highlighter for general use in all kinds of software
     such as forum systems, wikis or other applications that need to prettify
     source code. Highlights are:
 
@@ -59,13 +62,11 @@ else:
     )
 
 setup(
-    name = 'Pygments',
-    version = '1.4',
+    name = 'pygments-hack',
+    version = '0.1',
     url = 'http://pygments.org/',
     license = 'BSD License',
-    author = 'Georg Brandl',
-    author_email = 'georg@python.org',
-    description = 'Pygments is a syntax highlighting package written in Python.',
+    description = 'Pygments is a syntax highlighting package written in Python. This package is a modified version of pygments targetting code lines highlighting.',
     long_description = __doc__,
     keywords = 'syntax highlighting',
     packages = find_packages(),
