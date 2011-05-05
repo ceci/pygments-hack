@@ -2,7 +2,7 @@
 
 %% For portuguese compatibility
 \usepackage[brazil]{babel}
-\usepackage[utf8]{inputenc}
+\usepackage[latin1]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{float}
 \usepackage[scaled]{helvet}
@@ -49,18 +49,18 @@
 Uma tentativa agora com um environment pra criar boxes.
 
 \begin{tubainabox}{Uma note qualquer}
-\textul{脌s vezes a gente quer escrever uma note extensa e que tem c贸digo dentro, mas o minted zuava 
-todo o c贸digo, ent茫o agora estamos usando minipage em vez de parbox e parece que resolvemos 
-o problema}.
+纒 vezes a gente quer escrever uma note extensa e que tem c骴igo dentro, mas o minted zuava 
+todo o c骴igo, ent鉶 agora estamos usando minipage em vez de parbox e parece que resolvemos 
+o problema.
 
-脌s vezes a gente quer escrever uma note extensa e que tem c贸digo dentro, mas o minted zuava 
-todo o c贸digo, ent茫o agora estamos usando minipage em vez de parbox e parece que resolvemos 
-o problema.}
+纒 vezes a gente quer escrever uma note extensa e que tem c骴igo dentro, mas o minted zuava 
+todo o c骴igo, ent鉶 agora estamos usando minipage em vez de parbox e parece que resolvemos 
+o problema.
 
 {\small
   \begin{minted}[linenos, hgs={'1 3 5 9'}]{ruby}
     def menu_principal
-        menu = %w(cliente qualificac茫o restaurante)
+        menu = %w(cliente qualificac鉶 restaurante)
         menu_principal = "<ul>"
         menu.each do |item|
             menu_principal << "<li>" + link_to(item, :controller => item.pluralize) + "</li>"
@@ -69,6 +69,7 @@ o problema.}
         raw menu_principal
     end
   \end{minted}
+}
 \end{tubainabox}
 
 
