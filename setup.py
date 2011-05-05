@@ -63,7 +63,7 @@ else:
 
 setup(
     name = 'pygments-hack',
-    version = '0.1',
+    version = '0.2',
     url = 'http://pygments.org/',
     license = 'BSD License',
     description = 'Pygments is a syntax highlighting package written in Python. This package is a modified version of pygments targetting code lines highlighting.',
